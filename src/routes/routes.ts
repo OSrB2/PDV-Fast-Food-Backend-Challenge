@@ -1,11 +1,12 @@
 import express from "express";
-import { Router } from "express";
+import clientRoutes from "./clientRoutes";
+import orderRoutes from "./orderRoutes";
+import prodRoutes from "./productRoutes";
 
+const routes = express.Router();
 
-const router = Router();
+routes.use(clientRoutes);
+routes.use(orderRoutes);
+routes.use(prodRoutes);
 
-router.get("/test", (req, res) => {
-  return res.status(201).send();
-});
-
-export default router;
+export default routes;
