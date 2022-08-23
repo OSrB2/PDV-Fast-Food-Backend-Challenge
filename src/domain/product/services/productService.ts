@@ -1,0 +1,80 @@
+import { Products } from "../models/productsModel";
+
+export class ProductsService {
+  async register(
+    name: string,
+    product_code: number,
+    description: string,
+    price: number
+  ) {
+    const newProduct = await Products.create({
+      name,
+      product_code,
+      description,
+      price,
+      status: true,
+    });
+
+    return newProduct;
+  }
+
+  async allProducts() {
+    const products = await Products.findAll();
+
+    return products;
+  }
+
+  async productID(id: string) {
+    const checkProduct = await Products.findByPk(id);
+
+    return checkProduct;
+  }
+
+  async productName(name: string) {
+    const checkProduct = await Products.findOne({
+      where: {
+        name,
+      },
+    });
+
+    return checkProduct;
+  }
+
+  async updateProduct(
+    id: string,
+    name: string,
+    product_code: number,
+    description: string,
+    price: number
+  ) {
+    const productUpdated = await Products.update(
+      {
+        name,
+        product_code,
+        description,
+        price,
+        status: true,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+    return productUpdated;
+  }
+
+  async disableProduct(id: string) {
+    const inactiaveProduct = await Products.update(
+      {
+        status: 0,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+    return inactiaveProduct;
+  }
+}
