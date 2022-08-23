@@ -6,11 +6,11 @@ module.exports = {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
       },
       client_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         foreingKey: true,
         references: {
@@ -19,7 +19,7 @@ module.exports = {
         },
       },
       product_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         foreingKey: true,
         references: {
@@ -40,6 +40,10 @@ module.exports = {
       payment: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      note: {
+        type: Sequelize.STRING(300),
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,

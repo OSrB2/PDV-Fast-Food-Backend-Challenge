@@ -1,4 +1,5 @@
 const dotenv = require("dotenv").config();
+require("uuidv4");
 
 module.exports = {
   development: {

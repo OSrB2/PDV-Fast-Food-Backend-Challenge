@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("products", {
+    await queryInterface.createTable("admin", {
       id: {
         type: Sequelize.UUID,
         allowNull: false,
@@ -12,19 +12,15 @@ module.exports = {
         defaultValue: uuidv4(),
       },
       name: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(70),
         allowNull: false,
       },
-      product_code: {
-        type: Sequelize.INTEGER,
+      email: {
+        type: Sequelize.STRING(70),
         allowNull: false,
       },
-      description: {
-        type: Sequelize.STRING(300),
-        allowNull: false,
-      },
-      price: {
-        type: Sequelize.INTEGER,
+      password: {
+        type: Sequelize.STRING(120),
         allowNull: false,
       },
       status: {
@@ -44,6 +40,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("products");
+    await queryInterface.dropTable("admin");
   },
 };
