@@ -1,14 +1,15 @@
-import db from "../infrastructure/database/index";
+import db from "../../../infrastructure/database/index";
 import { DataTypes } from "sequelize";
-import { Products } from "./products";
-import { Client } from "./client";
+import { Products } from "../../product/models/productsModel";
+import { Client } from "../../client/models/clientModel";
 
 export const Orders = db.define(
-  "orders",
+  "order",
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       autoIncrement: true,
     },
     client_id: {
@@ -43,6 +44,10 @@ export const Orders = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    note: {
+      type: DataTypes.STRING(300),
+      allowNull: true,
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -53,8 +58,6 @@ export const Orders = db.define(
     },
   },
   {
-    tableName: "orders",
+    tableName: "order",
   }
 );
-
-export default Orders;

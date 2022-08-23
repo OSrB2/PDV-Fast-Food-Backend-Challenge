@@ -1,14 +1,15 @@
-import db from "../infrastructure/database/index";
+import db from "../../../infrastructure/database/index";
 import { DataTypes } from "sequelize";
+import { uuid } from "uuidv4";
 
 export const Products = db.define(
   "products",
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
+      defaultValue: uuid,
     },
     name: {
       type: DataTypes.STRING(100),
@@ -23,8 +24,13 @@ export const Products = db.define(
       allowNull: false,
     },
     price: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    status: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 1,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -39,5 +45,3 @@ export const Products = db.define(
     tableName: "products",
   }
 );
-
-export default Products;

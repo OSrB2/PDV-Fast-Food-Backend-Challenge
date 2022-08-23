@@ -1,5 +1,5 @@
-import Orders from "./orders";
-import Products from "./products";
+import Orders from "../domain/order/models/ordersModel";
+import Products from "../domain/product/models/productsModel";
 
 Orders.hasMany(Products, {
   foreignKey: "product_id",

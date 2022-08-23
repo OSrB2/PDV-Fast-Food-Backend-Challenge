@@ -1,18 +1,24 @@
-import db from "../infrastructure/database/index";
+import db from "../../../infrastructure/database/index";
 import { DataTypes } from "sequelize";
+import { uuid } from "uuidv4";
 
 export const Client = db.define(
   "client",
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
+      defaultValue: uuid,
     },
     name: {
       type: DataTypes.STRING(70),
       allowNull: false,
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -27,5 +33,3 @@ export const Client = db.define(
     tableName: "client",
   }
 );
-
-export default Client;
