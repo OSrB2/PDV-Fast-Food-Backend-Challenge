@@ -9,7 +9,7 @@
     "prepare": "husky install",
     "test": "jest --setupFiles dotenv/config",
     "dev": "ts-node-dev -r dotenv/config ./src/server/index.ts",
-    "start": "./src/server/index.ts",
+    "start": "-r dotenv/config ./src/server/index.ts",
     "build": "tsc"
   },
   "devDependencies": {
