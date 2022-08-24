@@ -9,14 +9,9 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      client_id: {
-        type: Sequelize.UUID,
+      client: {
+        type: Sequelize.STRING(70),
         allowNull: false,
-        foreingKey: true,
-        references: {
-          model: "client",
-          key: "id",
-        },
       },
       product_id: {
         type: Sequelize.UUID,
