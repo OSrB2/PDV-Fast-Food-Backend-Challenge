@@ -19,13 +19,22 @@ export class ProductsService {
   }
 
   async allProducts() {
-    const products = await Products.findAll();
+    const products = await Products.findAll({
+      where: {
+        status: true,
+      },
+    });
 
     return products;
   }
 
   async productID(id: string) {
-    const checkProduct = await Products.findByPk(id);
+    const checkProduct = await Products.findOne({
+      where: {
+        status: true,
+        id,
+      },
+    });
 
     return checkProduct;
   }
