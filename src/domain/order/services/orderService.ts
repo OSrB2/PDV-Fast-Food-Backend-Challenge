@@ -2,14 +2,14 @@ import { Orders } from "../models/ordersModel";
 
 export class OrderService {
   async createOrder(
-    client_id: string,
+    client: string,
     product_id: string,
     total: number,
     payment: string,
     note: string
   ) {
     const newOrder = await Orders.create({
-      client_id,
+      client,
       product_id,
       total,
       situation: "open",
