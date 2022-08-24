@@ -4,9 +4,9 @@ import { orderService } from "../services";
 export const OrderController = {
   async create(req: Request, res: Response) {
     try {
-      const { client_id, product_id, total, payment, note } = req.body;
+      const { client, product_id, total, payment, note } = req.body;
       const newOrder = await orderService.createOrder(
-        client_id,
+        client,
         product_id,
         total,
         payment,
