@@ -1,7 +1,6 @@
 import db from "../../../infrastructure/database/index";
 import { DataTypes } from "sequelize";
 import { Products } from "../../product/models/productsModel";
-import { Client } from "../../client/models/clientModel";
 
 export const Orders = db.define(
   "order",
@@ -12,14 +11,9 @@ export const Orders = db.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    client_id: {
-      type: DataTypes.INTEGER,
+    client: {
+      type: DataTypes.STRING(70),
       allowNull: false,
-      foreingKey: true,
-      references: {
-        model: Client,
-        key: "id",
-      },
     },
     product_id: {
       type: DataTypes.INTEGER,

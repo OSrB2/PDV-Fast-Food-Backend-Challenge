@@ -1,6 +1,6 @@
 import { validate, Joi } from "express-validation";
 
-export const update = validate({
+export const disable = validate({
   params: Joi.object({
     id: Joi.string().required(),
   }),
