@@ -8,7 +8,7 @@
 Projeto de Api para um restaurante fast-food com o objetivo de gerenciar pedidos de clientes, podendo listar produtos, pedidos abertos, em andamento e pedidos encerrados. O deploy foi feito na plataforma Heroku - [PDV-FastFood-osrb2](https://api-pdv-osrbr-devio.herokuapp.com/).
 
 ### Pré-requisitos e como rodar o projeto
-É necessário ter o gerenciador de pacotes Yarn instalado.
+É necessário ter o gerenciador de pacotes Yarn instalado, e o Docker instalado e configura..
 ```
 yarn
 ```
@@ -17,22 +17,28 @@ yarn
 ```
 git clone https://github.com/OSrB2/PDV-Fast-Food-Backend-Challenge.git
 ```
-3. Configure as vairáveis de ambiente conforme o arquivo .envexample para conectar o seu banco de dados.
 
-4. Execute as migrations para criar as tabelas no banco de dados
-
+3. Configure o banco de dados no Docker
+```
+docker compose up -d
+```
+4. Configure as vairáveis de ambiente conforme o arquivo .envexample para conectar o seu banco de dados.
+```
+npx sequelize db:create   
+```
+5. Execute as migrations para criar as tabelas no banco de dados
 ```
 npx sequelize db:migrate
 ```
-5. Execute o comando de seeders para popupar o banco de dados.
+6. Execute o comando de seeders para popupar o banco de dados.
 ```
-npx db:seeder:all
+npx sequelize db:seed:all
 ```
-6. Inicie o servidor
+7. Inicie o servidor
 ```
 yarn dev
 ```
-7. Para rodar os testes utilize o comando:
+8. Para rodar os testes utilize o comando:
 ```
 yarn jest
 ```

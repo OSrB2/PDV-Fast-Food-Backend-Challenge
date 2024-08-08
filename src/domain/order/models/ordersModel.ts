@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 import { Products } from "../../product/models/productsModel";
 
 export const Orders = db.define(
-  "order",
+  "orders",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -23,6 +23,14 @@ export const Orders = db.define(
         model: Products,
         key: "id",
       },
+    },
+    product_name: {
+      type: DataTypes.STRING(70),
+      allowNull: false,
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     total: {
       type: DataTypes.FLOAT,
@@ -52,6 +60,6 @@ export const Orders = db.define(
     },
   },
   {
-    tableName: "order",
+    tableName: "orders",
   }
 );
