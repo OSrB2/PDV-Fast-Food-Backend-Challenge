@@ -26,6 +26,10 @@ module.exports = {
         type: Sequelize.STRING(70),
         allowNull: false,
       },
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       total: {
         type: Sequelize.FLOAT,
         allowNull: false,

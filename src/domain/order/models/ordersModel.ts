@@ -28,6 +28,10 @@ export const Orders = db.define(
       type: DataTypes.STRING(70),
       allowNull: false,
     },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     total: {
       type: DataTypes.FLOAT,
       allowNull: false,
