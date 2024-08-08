@@ -1,23 +1,39 @@
-import { Orders } from "../models/ordersModel";
+import { update } from './../../product/validation/update';
+import { productService } from './../../product/services/index';
+import { Orders } from '../models/ordersModel';
+import { formatDate } from '../../../utils/dateUtils';
 
 export class OrderService {
   async createOrder(
     client: string,
     product_id: string,
+    product_name: string,
     total: number,
     payment: string,
     note: string
   ) {
+
+    const product = await productService.productID(product_id);
+
+    total = product.price;
+    product_name = product.name;
+
     const newOrder = await Orders.create({
       client,
       product_id,
+      product_name,
       total,
       situation: "open",
       payment,
       note,
     });
 
-    return newOrder;
+    //format date
+    const orderData = newOrder.get({ plain: true});
+      orderData.createdAt = formatDate(orderData.createdAt);
+      orderData.updatedAt = formatDate(orderData.updatedAt);
+
+    return orderData;
   }
 
   async allOrders() {
