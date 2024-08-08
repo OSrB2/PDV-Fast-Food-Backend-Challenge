@@ -4,7 +4,7 @@ export const create = validate({
   body: Joi.object({
     client: Joi.string().required(),
     product_id: Joi.string().required(),
-    total: Joi.number().required(),
+    total: Joi.number(),
     payment: Joi.string().required(),
     note: Joi.string(),
   }),
