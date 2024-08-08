@@ -8,16 +8,16 @@
 Projeto de Api para um restaurante fast-food com o objetivo de gerenciar pedidos de clientes, podendo listar produtos, pedidos abertos, em andamento e pedidos encerrados. O deploy foi feito na plataforma Heroku - [PDV-FastFood-osrb2](https://api-pdv-osrbr-devio.herokuapp.com/).
 
 ### Pré-requisitos e como rodar o projeto
-É necessário ter o gerenciador de pacotes Yarn instalado, e o Docker instalado e configura..
-```
-yarn
-```
+É necessário ter o gerenciador de pacotes Yarn instalado, e o Docker instalado e configurado
 
-2. Clone o repositório:
+1. Clone o repositório:
 ```
 git clone https://github.com/OSrB2/PDV-Fast-Food-Backend-Challenge.git
 ```
-
+2. Configure o yarn com o comando abaixo.
+```
+yarn
+```
 3. Configure o banco de dados no Docker
 ```
 docker compose up -d
