@@ -12,13 +12,16 @@ describe("No controller ao executar a função", () => {
         note: "teste",
       });
       expect(response.status).toBe(201);
+      expect(response.body).toHaveProperty("id");
     });
   });
 
   describe("getall", () => {
     test("Em caso de sucesso, deve retornar", async () => {
       const response = await supertest(app).get("/orders");
-      expect(typeof response).toBe("object");
+      expect(response.status).toBe(200);
+      expect(Array.isArray(response.body)).toBe(true);
+      //expect(typeof response).toBe("object");
     });
   });
 });

@@ -13,28 +13,6 @@ module.exports = {
         type: Sequelize.STRING(70),
         allowNull: false,
       },
-      product_id: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        foreingKey: true,
-        references: {
-          model: "products",
-          key: "id",
-        },
-      },
-      product_name: {
-        type: Sequelize.STRING(70),
-        allowNull: false,
-      },
-      quantity: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      total: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-        default: 0,
-      },
       situation: {
         type: Sequelize.ENUM("open", "preparation", "finished"),
         allowNull: false,

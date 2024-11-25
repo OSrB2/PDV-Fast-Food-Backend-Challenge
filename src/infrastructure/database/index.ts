@@ -1,4 +1,8 @@
 import { Sequelize, Dialect } from "sequelize";
+import { Orders } from "../../domain/order/models/ordersModel";
+import { OrderItems } from "../../domain/order/models/orderItemsModel";
+import { Products } from "../../domain/product/models/productsModel";
+import { setupAssociations } from "../../associations/associations";
 
 const DB_NAME = process.env.DB_NAME as string;
 const DB_USER = process.env.DB_USER as string;
@@ -25,6 +29,16 @@ async function hasConnection() {
     console.error("Error connecting to database");
   }
 }
+
+function initializeModels() {
+  Orders.init(db);
+  OrderItems.init(db);
+  Products.init(db);
+
+  setupAssociations();
+}
+
+initializeModels();
 
 Object.assign(db, {
   hasConnection,

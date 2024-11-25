@@ -1,38 +1,60 @@
-import { productService } from './../../product/services/index';
-import { Orders } from '../models/ordersModel';
-import { formatDate } from '../../../utils/dateUtils';
+import { productService } from "./../../product/services/index";
+import { Orders } from "../models/ordersModel";
+import { formatDate } from "../../../utils/dateUtils";
+import { OrderItems } from "../models/orderItemsModel";
 
 export class OrderService {
   async createOrder(
     client: string,
-    product_id: string,
-    product_name: string,
-    quantity: number,
-    total: number,
+    items: {product_id: string; quantity: number }[],
     payment: string,
     note: string
   ) {
+    const orderItems = [];
+    let totalOrder = 0;
 
-    const product = await productService.productID(product_id);
+    for (const item of items) {
+      const product = await productService.productID(item.product_id);
 
-    total = product.price * quantity;
-    product_name = product.name;
+      if (!product) {
+        throw new Error(`Product with id ${item.product_id} not found!`)
+      }
 
-    const newOrder = await Orders.create({
-      client,
-      product_id,
-      product_name,
-      quantity,
-      total,
-      situation: "open",
-      payment,
-      note,
-    });
+      const totalItem = product.price * item.quantity;
+      totalOrder += totalItem;
+
+      orderItems.push({
+        product_id: product.id,
+        product_name: product.name,
+        quantity: item.quantity,
+        price: product.price,
+        total: totalItem,
+      });
+    }
+
+    const newOrder = await Orders.create(
+      {
+        client,
+        situation: "open",
+        payment,
+        note,
+      },
+      {
+        include: [{ model: OrderItems, as: "items" }],
+      }
+    );
+
+    await OrderItems.bulkCreate(
+      orderItems.map((item) => ({
+        ...item,
+        order_id: newOrder.id,
+      }))
+    );
 
     //format date
-    const orderData = newOrder.get({ plain: true});
-      orderData.createdAt = formatDate(orderData.createdAt);
-      orderData.updatedAt = formatDate(orderData.updatedAt);
+    const orderData = newOrder.get({ plain: true });
+    orderData.createdAt = formatDate(orderData.createdAt);
+    orderData.updatedAt = formatDate(orderData.updatedAt);
 
     return orderData;
   }

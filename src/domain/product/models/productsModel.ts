@@ -1,15 +1,14 @@
 import db from "../../../infrastructure/database/index";
 import { DataTypes } from "sequelize";
-import { uuid } from "uuidv4";
 
 export const Products = db.define(
   "products",
   {
     id: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
-      defaultValue: uuid,
     },
     name: {
       type: DataTypes.STRING(100),

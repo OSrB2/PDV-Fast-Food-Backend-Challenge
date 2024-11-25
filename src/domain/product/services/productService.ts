@@ -49,6 +49,16 @@ export class ProductsService {
     return checkProduct;
   }
 
+  async productPrice(id: string) {
+    const priceProduct = await Products.findOne({
+      where: {
+        id,
+      },
+      attributes: ['price'],
+    });
+    return priceProduct;
+  }
+
   async updateProduct(
     id: string,
     name: string,
